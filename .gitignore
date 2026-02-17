@@ -1,0 +1,69 @@
+## Build results
+bin/
+obj/
+**/bin/
+**/obj/
+out/
+[Bb]uild/
+[Ll]og/
+
+## Visual Studio / VS Code
+.vs/
+.vscode/
+
+## User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+## NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+## .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## ASP.NET
+App_Data/
+BundleArtifacts/
+Generated Files/
+
+## Entity Framework
+Migrations/
+
+## Logs
+*.log
+
+## Resharper / Rider
+_ReSharper*/
+*.DotSettings.user
+.idea/
+
+## Coverage / Testing
+TestResults/
+*.coverage
+*.coveragexml
+coverage/
+
+## Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+## Publish output
+publish/
+
+## Azure
+*.azurePubxml
+*.pubxml.user
+
+## Others
+*.dbmdl
+*.jfm
