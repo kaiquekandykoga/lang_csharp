@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/containerisation/docker/script/bin/Debug/net10.0/apps.dll",
+            "program": "${workspaceFolder}/containerisation/docker/script/apps/bin/Debug/net10.0/apps.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/containerisation/docker/script",
+            "cwd": "${workspaceFolder}/containerisation/docker/script/apps",
             "stopAtEntry": false,
             "console": "integratedTerminal"
         }
