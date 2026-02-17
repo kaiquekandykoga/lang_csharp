@@ -1,8 +1,5 @@
-﻿int Calculate()
-{
-    int calc = 1 + 1;
-    return calc;
-}
+﻿using apps;
 
-int result = Calculate();
+var calculator = new Calculator();
+int result = calculator.Calculate();
 Console.WriteLine($"result = {result}");
