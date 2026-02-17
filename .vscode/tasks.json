@@ -7,7 +7,7 @@
             "type": "shell",
             "args": [
                 "build",
-                "${workspaceFolder}/apps/apps.csproj"
+                "${workspaceFolder}/containerisation/docker/script/apps.csproj"
             ],
             "problemMatcher": "$msCompile",
             "group": {
