@@ -1,4 +1,4 @@
-﻿using apps;
+﻿using Apps;
 
 var calculator = new Calculator();
 int result = calculator.Calculate();

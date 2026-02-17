@@ -1,4 +1,4 @@
-namespace apps;
+namespace Apps;
 
 public class Calculator
 {
