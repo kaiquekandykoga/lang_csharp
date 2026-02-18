@@ -2,9 +2,9 @@ namespace Apps;
 
 public class Calculator
 {
-    public int Calculate()
+    public int Add(int x, int y)
     {
-        int calc = 1 + 1;
+        int calc = x + y;
         return calc;
     }
 }

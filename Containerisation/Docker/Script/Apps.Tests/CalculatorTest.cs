@@ -6,7 +6,7 @@ public class CalculatorTests
     public void Calculate_ReturnsTwo()
     {
         var calculator = new Apps.Calculator();
-        int result = calculator.Calculate();
+        int result = calculator.Add(1, 1);
         Assert.Equal(2, result);
     }
 
@@ -15,7 +15,7 @@ public class CalculatorTests
     {
         var calculator = new Apps.Calculator();
         int expected = 1 + 1;
-        int result = calculator.Calculate();
+        int result = calculator.Add(1, 1);
         Assert.Equal(expected, result);
     }
 }
