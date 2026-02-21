@@ -89,7 +89,42 @@ public class CalculatorWebApiTests : IClassFixture<WebApplicationFactory<Program
         Assert.Null(response.Result);
     }
 
+    [Fact]
+    public async Task Add_WithDecimalType_ReturnsExpectedResult()
+    {
+        DecimalCalculatorResponse? response = await _httpClient.GetFromJsonAsync<DecimalCalculatorResponse>("/calculator/add?x=2.5&y=3.5&type=decimal");
+
+        Assert.NotNull(response);
+        Assert.Equal(2.5m, response!.X);
+        Assert.Equal(3.5m, response.Y);
+        Assert.Equal(6.0m, response.Result);
+    }
+
+    [Fact]
+    public async Task TryDivide_WithDecimalType_ReturnsExpectedResult()
+    {
+        DecimalTryDivideResponse? response = await _httpClient.GetFromJsonAsync<DecimalTryDivideResponse>("/calculator/try-divide?x=8.4&y=2.1&type=decimal");
+
+        Assert.NotNull(response);
+        Assert.Equal(8.4m, response!.X);
+        Assert.Equal(2.1m, response.Y);
+        Assert.True(response.Success);
+        Assert.Equal(4.0m, response.Result);
+    }
+
+    [Fact]
+    public async Task Add_WithUnsupportedType_ReturnsBadRequest()
+    {
+        HttpResponseMessage response = await _httpClient.GetAsync("/calculator/add?x=2&y=3&type=float");
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
     private sealed record CalculatorResponse(int X, int Y, int Result);
 
     private sealed record TryDivideResponse(int X, int Y, bool Success, int? Result);
+
+    private sealed record DecimalCalculatorResponse(decimal X, decimal Y, decimal Result);
+
+    private sealed record DecimalTryDivideResponse(decimal X, decimal Y, bool Success, decimal? Result);
 }
