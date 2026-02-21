@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="Calculator.Library/Calculator.Library.csproj" />
   <Project Path="Calculator.Library.Tests/Calculator.Library.Tests.csproj" />
-  <Project Path="Calculator/Calculator.csproj" />
+  <Project Path="Calculator.Console/Calculator.Console.csproj" />
 </Solution>
 
