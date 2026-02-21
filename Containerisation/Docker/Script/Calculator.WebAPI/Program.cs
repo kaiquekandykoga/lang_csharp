@@ -4,29 +4,21 @@ using CalculatorLib = Calculator.Library.Calculator;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 var calcGroup = app.MapGroup("/calculator")
     .WithTags("Calculator");
 
-calcGroup.MapGet("/add", (string x, string y, string? type) =>
-    DispatchBinaryOperation(x, y, type, OperationType.Add))
-.WithName("Add");
+void MapBinary(string pattern, OperationType op, string name) =>
+    calcGroup.MapGet(pattern, (string x, string y, string? type) =>
+        DispatchBinaryOperation(x, y, type, op))
+    .WithName(name);
 
-calcGroup.MapGet("/subtract", (string x, string y, string? type) =>
-    DispatchBinaryOperation(x, y, type, OperationType.Subtract))
-.WithName("Subtract");
-
-calcGroup.MapGet("/multiply", (string x, string y, string? type) =>
-    DispatchBinaryOperation(x, y, type, OperationType.Multiply))
-.WithName("Multiply");
-
-calcGroup.MapGet("/divide", (string x, string y, string? type) =>
-    DispatchBinaryOperation(x, y, type, OperationType.Divide))
-.WithName("Divide");
+MapBinary("/add", OperationType.Add, "Add");
+MapBinary("/subtract", OperationType.Subtract, "Subtract");
+MapBinary("/multiply", OperationType.Multiply, "Multiply");
+MapBinary("/divide", OperationType.Divide, "Divide");
 
 calcGroup.MapGet("/try-divide", (string x, string y, string? type) =>
     DispatchTryDivideOperation(x, y, type))
