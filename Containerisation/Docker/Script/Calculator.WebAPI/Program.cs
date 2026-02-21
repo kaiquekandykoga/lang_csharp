@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Numerics;
+using Microsoft.AspNetCore.Mvc;
 using CalculatorLib = Calculator.Library.Calculator;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,7 @@ var calcGroup = app.MapGroup("/calculator")
     .WithTags("Calculator");
 
 void MapBinary(string pattern, OperationType op, string name) =>
-    calcGroup.MapGet(pattern, (string x, string y, string? type) =>
+    calcGroup.MapGet(pattern, ([FromQuery] string x, [FromQuery] string y, [FromQuery] string? type) =>
         DispatchBinaryOperation(x, y, type, op))
     .WithName(name);
 
@@ -20,7 +21,7 @@ MapBinary("/subtract", OperationType.Subtract, "Subtract");
 MapBinary("/multiply", OperationType.Multiply, "Multiply");
 MapBinary("/divide", OperationType.Divide, "Divide");
 
-calcGroup.MapGet("/try-divide", (string x, string y, string? type) =>
+calcGroup.MapGet("/try-divide", ([FromQuery] string x, [FromQuery] string y, [FromQuery] string? type) =>
     DispatchTryDivideOperation(x, y, type))
 .WithName("TryDivide");
 
