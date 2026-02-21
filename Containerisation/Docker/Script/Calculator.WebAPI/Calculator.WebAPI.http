@@ -1,6 +1,36 @@
 @Calculator.WebAPI_HostAddress = http://localhost:5233
 
-GET {{Calculator.WebAPI_HostAddress}}/weatherforecast/
+GET {{Calculator.WebAPI_HostAddress}}/calculator/add?x=10&y=5
+Accept: application/json
+
+###
+
+GET {{Calculator.WebAPI_HostAddress}}/calculator/subtract?x=10&y=5
+Accept: application/json
+
+###
+
+GET {{Calculator.WebAPI_HostAddress}}/calculator/multiply?x=10&y=5
+Accept: application/json
+
+###
+
+GET {{Calculator.WebAPI_HostAddress}}/calculator/divide?x=10&y=2
+Accept: application/json
+
+###
+
+GET {{Calculator.WebAPI_HostAddress}}/calculator/divide?x=10&y=0
+Accept: application/json
+
+###
+
+GET {{Calculator.WebAPI_HostAddress}}/calculator/try-divide?x=10&y=2
+Accept: application/json
+
+###
+
+GET {{Calculator.WebAPI_HostAddress}}/calculator/try-divide?x=10&y=0
 Accept: application/json
 
 ###
