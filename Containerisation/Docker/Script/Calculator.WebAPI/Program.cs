@@ -61,10 +61,6 @@ app.MapGet("/calculator/try-divide", (int x, int y) =>
 
 app.Run();
 
-public partial class Program
-{
-}
-
 record CalculatorResponse(int X, int Y, int Result);
 
 record TryDivideResponse(int X, int Y, bool Success, int? Result);
