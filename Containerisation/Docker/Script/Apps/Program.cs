@@ -32,3 +32,15 @@ foreach (var (x, y) in tests)
         Console.WriteLine($"Calculator.Divide({x}, {y}) → Exception: {ex.Message}");
     }
 }
+
+foreach (var (x, y) in tests)
+{
+    if (Calculator.TryDivide(x, y, out int result))
+    {
+        Console.WriteLine($"Calculator.TryDivide({x}, {y}) → Success: {result}");
+    }
+    else
+    {
+        Console.WriteLine($"Calculator.TryDivide({x}, {y}) → Failed: Division by zero.");
+    }
+}
