@@ -1,3 +1,5 @@
+using CalculatorLib = Calculator.Library.Calculator;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,28 +16,51 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+app.MapGet("/calculator/add", (int x, int y) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    int result = CalculatorLib.Add(x, y);
+    return Results.Ok(new CalculatorResponse(x, y, result));
 })
-.WithName("GetWeatherForecast");
+.WithName("Add");
+
+app.MapGet("/calculator/subtract", (int x, int y) =>
+{
+    int result = CalculatorLib.Subtract(x, y);
+    return Results.Ok(new CalculatorResponse(x, y, result));
+})
+.WithName("Subtract");
+
+app.MapGet("/calculator/multiply", (int x, int y) =>
+{
+    int result = CalculatorLib.Multiply(x, y);
+    return Results.Ok(new CalculatorResponse(x, y, result));
+})
+.WithName("Multiply");
+
+app.MapGet("/calculator/divide", (int x, int y) =>
+{
+    try
+    {
+        int result = CalculatorLib.Divide(x, y);
+        return Results.Ok(new CalculatorResponse(x, y, result));
+    }
+    catch (DivideByZeroException ex)
+    {
+        return Results.BadRequest(new { error = ex.Message });
+    }
+})
+.WithName("Divide");
+
+app.MapGet("/calculator/try-divide", (int x, int y) =>
+{
+    bool success = CalculatorLib.TryDivide(x, y, out int result);
+
+    return Results.Ok(new TryDivideResponse(x, y, success, success ? result : null));
+})
+.WithName("TryDivide");
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+record CalculatorResponse(int X, int Y, int Result);
+
+record TryDivideResponse(int X, int Y, bool Success, int? Result);
