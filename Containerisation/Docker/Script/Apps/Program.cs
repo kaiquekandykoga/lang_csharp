@@ -2,18 +2,35 @@
 
 var calculator = new Calculator();
 
-Console.WriteLine($"calculator.Add(1, 1) → {calculator.Add(1, 1)}");
-Console.WriteLine($"calculator.Add(1, 0) → {calculator.Add(1, 0)}");
-
-Console.WriteLine($"calculator.Subtract(1, 1) → {calculator.Subtract(1, 1)}");
-
-Console.WriteLine($"calculator.Multiply(1, 1) → {calculator.Multiply(1, 1)}");
-
-try
+var tests = new(int x, int y)[]
 {
-    Console.WriteLine($"calculator.Divide(1, 0) → {calculator.Divide(1, 0)}");
+    (1, 1),
+    (1, 0)
+};
+
+foreach (var (x, y) in tests)
+{
+    Console.WriteLine($"calculator.Add({x}, {y}) → {calculator.Add(x, y)}");
 }
-catch (DivideByZeroException ex)
+
+foreach (var (x, y) in tests)
 {
-    Console.WriteLine($"calculator.Divide(1, 0) → Exception: {ex.Message}");
+    Console.WriteLine($"calculator.Subtract({x}, {y}) → {calculator.Subtract(x, y)}");
+}
+
+foreach (var (x, y) in tests)
+{
+    Console.WriteLine($"calculator.Multiply({x}, {y}) → {calculator.Multiply(x, y)}");
+}
+
+foreach (var (x, y) in tests)
+{
+    try
+    {
+        Console.WriteLine($"calculator.Divide({x}, {y}) → {calculator.Divide(x, y)}");
+    }
+    catch (DivideByZeroException ex)
+    {
+        Console.WriteLine($"calculator.Divide({x}, {y}) → Exception: {ex.Message}");
+    }
 }
