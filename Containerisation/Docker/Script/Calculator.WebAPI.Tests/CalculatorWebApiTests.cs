@@ -120,6 +120,25 @@ public class CalculatorWebApiTests : IClassFixture<WebApplicationFactory<Program
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
+    [Fact]
+    public async Task Add_WithUppercaseAndSpacedType_ReturnsExpectedResult()
+    {
+        DecimalCalculatorResponse? response = await _httpClient.GetFromJsonAsync<DecimalCalculatorResponse>("/calculator/add?x=1.5&y=2.5&type=%20DECIMAL%20");
+
+        Assert.NotNull(response);
+        Assert.Equal(1.5m, response!.X);
+        Assert.Equal(2.5m, response.Y);
+        Assert.Equal(4.0m, response.Result);
+    }
+
+    [Fact]
+    public async Task Add_MissingRequiredQueryParameter_ReturnsBadRequest()
+    {
+        HttpResponseMessage response = await _httpClient.GetAsync("/calculator/add?y=3");
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
     private sealed record CalculatorResponse(int X, int Y, int Result);
 
     private sealed record TryDivideResponse(int X, int Y, bool Success, int? Result);
