@@ -1,4 +1,6 @@
-﻿namespace Apps.Tests;
+﻿using Apps.Library;
+
+namespace Apps.Tests;
 
 public class CalculatorTests
 {

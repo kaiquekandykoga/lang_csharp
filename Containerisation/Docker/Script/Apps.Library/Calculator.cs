@@ -1,4 +1,4 @@
-namespace Apps;
+namespace Apps.Library;
 
 /// <summary>
 /// Simple stateless arithmetic calculator.

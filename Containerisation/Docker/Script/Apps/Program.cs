@@ -1,4 +1,4 @@
-﻿using Apps;
+﻿using Apps.Library;
 
 var tests = new (int x, int y)[]
 {
