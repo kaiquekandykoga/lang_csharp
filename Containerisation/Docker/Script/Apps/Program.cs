@@ -1,46 +1,40 @@
 ﻿using Apps;
 
-var tests = new(int x, int y)[]
+var tests = new (int x, int y)[]
 {
     (1, 1),
     (1, 0)
 };
 
-foreach (var (x, y) in tests)
+var operations = new List<(string Name, Func<int, int, int> Execute)>
 {
-    Console.WriteLine($"Calculator.Add({x}, {y}) → {Calculator.Add(x, y)}");
-}
-
-foreach (var (x, y) in tests)
-{
-    Console.WriteLine($"Calculator.Subtract({x}, {y}) → {Calculator.Subtract(x, y)}");
-}
-
-foreach (var (x, y) in tests)
-{
-    Console.WriteLine($"Calculator.Multiply({x}, {y}) → {Calculator.Multiply(x, y)}");
-}
-
-foreach (var (x, y) in tests)
-{
-    try
+    ("Add", Calculator.Add),
+    ("Subtract", Calculator.Subtract),
+    ("Multiply", Calculator.Multiply),
+    ("Divide", Calculator.Divide),
+    ("TryDivide", (x, y) =>
     {
-        Console.WriteLine($"Calculator.Divide({x}, {y}) → {Calculator.Divide(x, y)}");
-    }
-    catch (DivideByZeroException ex)
-    {
-        Console.WriteLine($"Calculator.Divide({x}, {y}) → Exception: {ex.Message}");
-    }
-}
+        return Calculator.TryDivide(x, y, out int result)
+            ? result
+            : throw new DivideByZeroException("Cannot divide by zero.");
+    })
+};
 
-foreach (var (x, y) in tests)
+foreach (var op in operations)
 {
-    if (Calculator.TryDivide(x, y, out int result))
+    foreach (var (x, y) in tests)
     {
-        Console.WriteLine($"Calculator.TryDivide({x}, {y}) → Success: {result}");
-    }
-    else
-    {
-        Console.WriteLine($"Calculator.TryDivide({x}, {y}) → Failed: Division by zero.");
+        try
+        {
+            Console.WriteLine($"Calculator.{op.Name}({x}, {y}) → {op.Execute(x, y)}");
+        }
+        catch (DivideByZeroException ex)
+        {
+            Console.WriteLine($"Calculator.{op.Name}({x}, {y}) → Exception: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Calculator.{op.Name}({x}, {y}) → Unexpected Exception: {ex.Message}");
+        }
     }
 }
