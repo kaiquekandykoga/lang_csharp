@@ -1,4 +1,4 @@
-﻿using Apps;
+﻿using CalculatorLib = Calculator.Library.Calculator;
 
 var tests = new (int x, int y)[]
 {
@@ -8,13 +8,13 @@ var tests = new (int x, int y)[]
 
 var operations = new List<(string Name, Func<int, int, int> Execute)>
 {
-    ("Add", Calculator.Add),
-    ("Subtract", Calculator.Subtract),
-    ("Multiply", Calculator.Multiply),
-    ("Divide", Calculator.Divide),
+    ("Add", CalculatorLib.Add),
+    ("Subtract", CalculatorLib.Subtract),
+    ("Multiply", CalculatorLib.Multiply),
+    ("Divide", CalculatorLib.Divide),
     ("TryDivide", (x, y) =>
     {
-        return Calculator.TryDivide(x, y, out int result)
+        return CalculatorLib.TryDivide(x, y, out int result)
             ? result
             : throw new DivideByZeroException("Cannot divide by zero.");
     })
