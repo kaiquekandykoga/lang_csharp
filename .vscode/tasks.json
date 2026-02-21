@@ -1,4 +1,30 @@
 {
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/containerisation/docker/script/Apps/Apps.csproj"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "dotnet test ${workspaceFolder}/containerisation/docker/script/Apps.Tests/Apps.Tests.csproj && dotnet test ${workspaceFolder}/Containerisation/Docker/Script/Calculator.WebAPI.Tests/Calculator.WebAPI.Tests.csproj",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    }
+  ]
+}{
     "version": "2.0.0",
     "tasks": [
         {
