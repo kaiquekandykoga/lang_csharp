@@ -1,7 +1,5 @@
 ﻿using Apps;
 
-var calculator = new Calculator();
-
 var tests = new(int x, int y)[]
 {
     (1, 1),
@@ -10,27 +8,27 @@ var tests = new(int x, int y)[]
 
 foreach (var (x, y) in tests)
 {
-    Console.WriteLine($"calculator.Add({x}, {y}) → {calculator.Add(x, y)}");
+    Console.WriteLine($"Calculator.Add({x}, {y}) → {Calculator.Add(x, y)}");
 }
 
 foreach (var (x, y) in tests)
 {
-    Console.WriteLine($"calculator.Subtract({x}, {y}) → {calculator.Subtract(x, y)}");
+    Console.WriteLine($"Calculator.Subtract({x}, {y}) → {Calculator.Subtract(x, y)}");
 }
 
 foreach (var (x, y) in tests)
 {
-    Console.WriteLine($"calculator.Multiply({x}, {y}) → {calculator.Multiply(x, y)}");
+    Console.WriteLine($"Calculator.Multiply({x}, {y}) → {Calculator.Multiply(x, y)}");
 }
 
 foreach (var (x, y) in tests)
 {
     try
     {
-        Console.WriteLine($"calculator.Divide({x}, {y}) → {calculator.Divide(x, y)}");
+        Console.WriteLine($"Calculator.Divide({x}, {y}) → {Calculator.Divide(x, y)}");
     }
     catch (DivideByZeroException ex)
     {
-        Console.WriteLine($"calculator.Divide({x}, {y}) → Exception: {ex.Message}");
+        Console.WriteLine($"Calculator.Divide({x}, {y}) → Exception: {ex.Message}");
     }
 }

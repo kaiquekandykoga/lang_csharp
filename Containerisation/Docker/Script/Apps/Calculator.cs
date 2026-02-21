@@ -1,26 +1,14 @@
 namespace Apps;
 
-public class Calculator
+public static class Calculator
 {
-    public int Add(int x, int y)
-    {
-        int calc = x + y;
-        return calc;
-    }
+    public static int Add(int x, int y) => x + y;
 
-    public int Subtract(int x, int y)
-    {
-        int calc = x - y;
-        return calc;
-    }
+    public static int Subtract(int x, int y) => x - y;
 
-    public int Multiply(int x, int y)
-    {
-        int calc = x * y;
-        return calc;
-    }
+    public static int Multiply(int x, int y) => x * y;
 
-    public int Divide(int x, int y)
+    public static int Divide(int x, int y)
     {
         if (y == 0)
         {
