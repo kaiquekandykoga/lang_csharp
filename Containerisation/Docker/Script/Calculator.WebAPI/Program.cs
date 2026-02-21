@@ -7,37 +7,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+var calcGroup = app.MapGroup("/calculator")
+    .WithTags("Calculator");
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
-app.MapGet("/calculator/add", (int x, int y) =>
+calcGroup.MapGet("/add", (int x, int y) =>
 {
     int result = CalculatorLib.Add(x, y);
     return Results.Ok(new CalculatorResponse(x, y, result));
 })
 .WithName("Add");
 
-app.MapGet("/calculator/subtract", (int x, int y) =>
+calcGroup.MapGet("/subtract", (int x, int y) =>
 {
     int result = CalculatorLib.Subtract(x, y);
     return Results.Ok(new CalculatorResponse(x, y, result));
 })
 .WithName("Subtract");
 
-app.MapGet("/calculator/multiply", (int x, int y) =>
+calcGroup.MapGet("/multiply", (int x, int y) =>
 {
     int result = CalculatorLib.Multiply(x, y);
     return Results.Ok(new CalculatorResponse(x, y, result));
 })
 .WithName("Multiply");
 
-app.MapGet("/calculator/divide", (int x, int y) =>
+calcGroup.MapGet("/divide", (int x, int y) =>
 {
     try
     {
@@ -51,7 +45,7 @@ app.MapGet("/calculator/divide", (int x, int y) =>
 })
 .WithName("Divide");
 
-app.MapGet("/calculator/try-divide", (int x, int y) =>
+calcGroup.MapGet("/try-divide", (int x, int y) =>
 {
     bool success = CalculatorLib.TryDivide(x, y, out int result);
 
