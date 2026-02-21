@@ -67,4 +67,29 @@ public class CalculatorTests
         Assert.False(success);
         Assert.Equal(0, result);
     }
+
+    [Fact]
+    public void Add_WithDecimal_ReturnsExpectedResult()
+    {
+        decimal result = Calculator.Add(1.5m, 2.25m);
+
+        Assert.Equal(3.75m, result);
+    }
+
+    [Fact]
+    public void Divide_WithDouble_ReturnsExpectedResult()
+    {
+        double result = Calculator.Divide(7.5d, 2.5d);
+
+        Assert.Equal(3d, result);
+    }
+
+    [Fact]
+    public void TryDivide_WithDecimalAndZeroDivisor_ReturnsFalseAndZero()
+    {
+        bool success = Calculator.TryDivide(10m, 0m, out decimal result);
+
+        Assert.False(success);
+        Assert.Equal(0m, result);
+    }
 }
