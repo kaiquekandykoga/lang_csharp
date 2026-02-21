@@ -2,5 +2,7 @@
   <Project Path="Calculator.Library/Calculator.Library.csproj" />
   <Project Path="Calculator.Library.Tests/Calculator.Library.Tests.csproj" />
   <Project Path="Calculator.Console/Calculator.Console.csproj" />
+  <Project Path="Calculator.WebAPI/Calculator.WebAPI.csproj" />
+  <Project Path="Calculator.WebAPI.Tests/Calculator.WebAPI.Tests.csproj" />
 </Solution>
 
